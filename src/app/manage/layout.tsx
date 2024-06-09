@@ -7,7 +7,7 @@ interface ManageLayoutProps {
 
 export default function ManageLayout({ children }: ManageLayoutProps) {
   return (
-    <div>
+    <div className="w-full h-screen">
       <Navbar />
 
       {children}
