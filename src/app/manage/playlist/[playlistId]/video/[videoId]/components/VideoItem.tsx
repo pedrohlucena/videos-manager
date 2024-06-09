@@ -1,5 +1,6 @@
 import { Checkbox } from '@/components'
 import { MonitorPlay } from '@phosphor-icons/react/dist/ssr'
+import { MouseEvent } from 'react'
 
 interface VideoItemProps {
   number: number
@@ -8,10 +9,14 @@ interface VideoItemProps {
 }
 
 export function VideoItem({ title, duration }: VideoItemProps) {
+  const handleMarkVideoAsCompleted = (event: MouseEvent) => {
+    event.stopPropagation()
+  }
+
   return (
     <div className="flex gap-4 w-full px-4 py-2 hover:bg-gray4">
       <span>
-        <Checkbox />
+        <Checkbox onClick={handleMarkVideoAsCompleted} />
       </span>
 
       <span className="flex flex-col gap-2 ">
