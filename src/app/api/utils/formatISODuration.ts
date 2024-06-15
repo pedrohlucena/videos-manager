@@ -17,7 +17,8 @@ export function formatISODuration(duration: string) {
   if (days) formattedParts.push(`${days}d`)
   if (hours) formattedParts.push(`${hours}h`)
   if (minutes) formattedParts.push(`${minutes}min`)
-  if (seconds) formattedParts.push(`${seconds}s`)
+  if (!years && !months && !days && !hours && !minutes)
+    formattedParts.push(`${seconds}s`)
 
   return formattedParts.join(' ')
 }
