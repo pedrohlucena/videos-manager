@@ -56,6 +56,7 @@ export function PlaylistContent({ videos }: PlaylistContentProps) {
             <ul>
               {videos.map((video, index) => {
                 const videoNumber = index + 1
+                const title = `${videoNumber}. ${video.title}`
 
                 const url = `/manage/playlist/${playlistId}/video/${video.id}`
 
@@ -63,8 +64,8 @@ export function PlaylistContent({ videos }: PlaylistContentProps) {
                   <li key={video.id}>
                     <Link href={url}>
                       <VideoItem
-                        number={videoNumber}
-                        title={video.title}
+                        className="relative"
+                        title={title}
                         duration={video.duration}
                       />
                     </Link>
