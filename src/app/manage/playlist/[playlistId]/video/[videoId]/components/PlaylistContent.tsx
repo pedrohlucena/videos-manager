@@ -1,11 +1,19 @@
 'use client'
 
+import { Video } from '@/models'
 import { ArrowLeft, X } from '@phosphor-icons/react'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { useState } from 'react'
 import { VideoItem } from '../components'
 
-export function PlaylistContent() {
+interface PlaylistContentProps {
+  videos: Video[]
+}
+
+export function PlaylistContent({ videos }: PlaylistContentProps) {
+  const { playlistId } = useParams()
+
   const [open, setOpen] = useState(true)
 
   function handlePlayListContentOpen() {
@@ -15,51 +23,6 @@ export function PlaylistContent() {
   function handlePlayListContentClose() {
     setOpen(false)
   }
-
-  const videos = [
-    {
-      id: '1',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-    {
-      id: '2',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-    {
-      id: '3',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-    {
-      id: '4',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-    {
-      id: '5',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-    {
-      id: '6',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-    {
-      id: '7',
-      number: 1,
-      title: 'Curso Python #01 - Seja um Programador',
-      duration: '29min',
-    },
-  ]
 
   return (
     <>
@@ -91,17 +54,23 @@ export function PlaylistContent() {
 
           <main className="h-[calc(100%-3.375rem)] overflow-y-scroll">
             <ul>
-              {videos.map((video) => (
-                <li key={video.id}>
-                  <Link href="/manage/playlist/1/video/1">
-                    <VideoItem
-                      number={video.number}
-                      title={video.title}
-                      duration={video.duration}
-                    />
-                  </Link>
-                </li>
-              ))}
+              {videos.map((video, index) => {
+                const videoNumber = index + 1
+
+                const url = `/manage/playlist/${playlistId}/video/${video.id}`
+
+                return (
+                  <li key={video.id}>
+                    <Link href={url}>
+                      <VideoItem
+                        number={videoNumber}
+                        title={video.title}
+                        duration={video.duration}
+                      />
+                    </Link>
+                  </li>
+                )
+              })}
             </ul>
           </main>
         </aside>
